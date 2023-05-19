@@ -5,9 +5,10 @@ from models import Author, Quote
 def search_quote_from_name(user_args):
     name = user_args.split('name:')[1]
     # get obj Author from name to be sure everything is correct
-    # author = Author.objects(fullname=name).first()
-    quote = Quote.objects(author__fullname=name)
-    print(quote)
+    author = Author.objects(fullname=name).first()
+    quotes = Quote.objects(author=author.id)
+    for quote in quotes:
+        print(quote)
 
 
 def handle_argument(argument):
