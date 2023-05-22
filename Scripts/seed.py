@@ -22,7 +22,9 @@ def add_quotes_from_json():
         quotes = json.load(quotes_json)
 
     for quote in quotes:
-        new_quote = Quote(author=quote['author'])
+        author_fullname = quote['author']
+        author = Author.objects(fullname=author_fullname).first()
+        new_quote = Quote(author=author)
         new_quote.tags = quote['tags']
         new_quote.quote = quote['quote']
         new_quote.save()
